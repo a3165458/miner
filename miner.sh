@@ -23,7 +23,7 @@ wget https://github.com/ronanyeah/mineral-app/releases/download/v1/linux.zip
 unzip linux.zip
 read -p "请输入SUI挖矿钱包私钥: " wallet_addr
 export WALLET=$wallet_addr
-screen -dmS miner bash -c "./mineral-linux mine'"
+screen -dmS miner bash -c "./mineral-linux mine"
 
 echo "====================== 安装完成 请使用screen -r miner 查看运行情况 ==========================="
 
