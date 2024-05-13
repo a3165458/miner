@@ -28,6 +28,29 @@ echo "====================== 安装完成 请使用screen -r miner 查看运行�
 
 }
 
+function multiple() {
+# 提示用户输入包含私钥的文件路径
+echo "请输入包含SUI挖矿钱包私钥的文件路径："
+read file_path
+
+# 检查文件是否存在
+if [ ! -f "$file_path" ]; then
+    echo "文件不存在，请检查路径是否正确。"
+fi
+
+# 为文件中的每个私钥创建一个 screen 会话
+while IFS= read -r wallet_addr
+do
+    if [ -n "$wallet_addr" ]; then
+        session_name="miner_$(echo $wallet_addr | md5sum | cut -d' ' -f1)" # 创建唯一的 session 名称
+        screen -dmS "$session_name" bash -c "export WALLET=$wallet_addr; ./mineral-linux mine"
+        echo "为钱包 $wallet_addr 启动了挖矿会话 $session_name"
+    fi
+done < "$file_path"
+
+echo "所有挖矿会话已启动。"
+
+}
 
 # 主菜单
 function main_menu() {
@@ -39,10 +62,12 @@ function main_menu() {
     echo "节点社区 Discord 社群:https://discord.gg/GbMV5EcNWF"
     echo "请选择要执行的操作:"
     echo "1. 安装并启动节点"
+    echo "2. 多开启动节点"
     read -p "请输入选项(1): " OPTION
 
     case $OPTION in
     1) install_node ;;
+    2) multiple ;;
     *) echo "无效选项" ;;
     esac
 }
