@@ -52,6 +52,10 @@ echo "所有挖矿会话已启动。"
 
 }
 
+function check_stats() {
+./mineral-linux mine stats
+}
+
 # 主菜单
 function main_menu() {
     clear
@@ -63,11 +67,13 @@ function main_menu() {
     echo "请选择要执行的操作:"
     echo "1. 安装并启动节点"
     echo "2. 多开启动节点"
+    echo "3. 查看挖矿运行状态"
     read -p "请输入选项(1): " OPTION
 
     case $OPTION in
     1) install_node ;;
     2) multiple ;;
+    3) check_stats ;;
     *) echo "无效选项" ;;
     esac
 }
