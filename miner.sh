@@ -21,7 +21,7 @@ go version
 
 wget https://github.com/ronanyeah/mineral-app/releases/download/v1/linux.zip
 unzip linux.zip
-read -p "请输入挖矿钱包地址: " wallet_addr
+read -p "请输入SUI挖矿钱包私钥: " wallet_addr
 export WALLET=$wallet_addr
 screen -dmS miner bash -c "./mineral-linux mine'"
 
