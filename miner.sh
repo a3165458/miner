@@ -56,6 +56,10 @@ function check_stats() {
 ./mineral-linux mine stats
 }
 
+function uninstall_node() {
+ rm -rf mineral-linux
+}
+
 # 主菜单
 function main_menu() {
     clear
@@ -68,12 +72,14 @@ function main_menu() {
     echo "1. 安装并启动节点"
     echo "2. 多开启动节点"
     echo "3. 查看挖矿运行状态"
+    echo "4. 删除节点程序"
     read -p "请输入选项(1): " OPTION
 
     case $OPTION in
     1) install_node ;;
     2) multiple ;;
     3) check_stats ;;
+    4) uninstall_node ;;
     *) echo "无效选项" ;;
     esac
 }
